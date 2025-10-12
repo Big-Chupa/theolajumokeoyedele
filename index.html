@@ -402,6 +402,247 @@
       padding: 1rem;
     }
 
+    /* BOOK SECTION */
+    .book-section {
+      position: relative;
+      top: 60px;
+      padding: 2.5rem 40px;
+      /* background: #fff9f0; */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    /* WHATSAPP COMMUNITY SECTION */
+    .whatsapp-section {
+      position: relative;
+      top: 60px;
+      padding: 2.5rem 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      /* background: #f7fff4; */
+    }
+
+    .whatsapp-card {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      max-width: 900px;
+      width: 100%;
+      background: #fff;
+      border-radius: 12px;
+      padding: 1rem 1.2rem;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+    }
+
+    .whatsapp-card .whatsapp-image {
+      width: 120px;
+      height: 120px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .whatsapp-card .whatsapp-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 8px;
+    }
+
+    .whatsapp-card .whatsapp-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      align-items: flex-start;
+    }
+
+    .whatsapp-card .whatsapp-info h3 {
+      margin: 0;
+      font-size: 1.2rem;
+      color: #111;
+    }
+
+    .whatsapp-card .whatsapp-info p {
+      margin: 0;
+      color: #444;
+    }
+
+    .whatsapp-card .join-btn {
+      display: inline-block;
+      margin-top: 0.5rem;
+      background: #25D366;
+      color: #fff;
+      padding: 0.6rem 1rem;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    /* SOCIAL MEDIA SECTION */
+    .social-section {
+      position: relative;
+      top: 60px;
+      padding: 2rem 40px;
+      /* background: #fff; */
+      /* background-color: red; */
+      /* display: flex; */
+      align-items: center;
+      justify-content: center;
+    }
+
+    .social-card {
+      max-width: 900px;
+      width: 100%;
+      background: transparent;
+      border-radius: 8px;
+      background-color: #fff;
+      padding: 1rem 1.2rem;
+      display: flex;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+      /* align-items: center; */
+      /* justify-content: space-between; */
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .social-card .social-title {
+      /* flex: 1 1 240px; */
+    }
+
+    /* .social-card .social-links {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      justify-content: flex-end;
+      flex: 1 1 300px;
+    } */
+
+    .social-links a {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 8px 10px;
+      min-width: 56px;
+      background: #222;
+      color: #fff;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease, color 0.18s ease;
+    }
+
+    .social-links a svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
+
+    .social-links a .social-label {
+      font-size: 0.78rem;
+      line-height: 1;
+      color: inherit;
+      white-space: nowrap;
+    }
+
+    .social-links a:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 22px rgba(0, 0, 0, 0.12);
+      background: #f0c200;
+      color: #111;
+    }
+
+    @media (max-width: 900px) {
+      .whatsapp-card,
+      .book-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      .whatsapp-card .whatsapp-info,
+      .book-card .book-info {
+        align-items: center;
+      }
+      .social-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      .social-card .social-links {
+        justify-content: center;
+      }
+    }
+
+    .book-card {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      max-width: 900px;
+      width: 100%;
+      background: #fff;
+      border-radius: 12px;
+      padding: 1rem 1.2rem;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+    }
+
+    .book-card img {
+      width: 160px;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 6px;
+      flex-shrink: 0;
+    }
+
+    .book-card .book-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      align-items: flex-start;
+    }
+
+    .book-card .book-info h3 {
+      margin: 0;
+      font-size: 1.25rem;
+      color: #222;
+    }
+
+    .book-card .book-info p {
+      margin: 0;
+      color: #444;
+    }
+
+    .book-card .book-info a.download-btn {
+      display: inline-block;
+      margin-top: 0.5rem;
+      background: #f0c200;
+      color: #111;
+      padding: 0.6rem 1rem;
+      border-radius: 8px;
+      font-weight: 600;
+    }
+
+    @media (max-width: 900px) {
+      .book-section {
+        padding: 1.5rem 16px;
+      }
+      .book-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      .book-card img {
+        width: 140px;
+        height: 190px;
+      }
+      .book-card .book-info {
+        align-items: center;
+      }
+    }
+
     /* MOBILE NAV */
     @media (max-width: 900px) {
       .hamburger {
@@ -445,6 +686,9 @@
       <li><a href="#offers">Offers</a></li>
       <li><a href="#form">Join Us</a></li>
       <li><a href="#testimonials">Testimonials</a></li>
+      <li><a href="#whatsapp">WhatsApp</a></li>
+      <li><a href="#book">Get the Book</a></li>
+      <li><a href="#social">Social</a></li>
     </ul>
     <div class="hamburger"><span></span><span></span><span></span></div>
   </nav>
@@ -609,6 +853,64 @@
         <button class="carousel-btn next" onclick="nextSlide()">
           &#10095;
         </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHATSAPP COMMUNITY SECTION -->
+  <section class="whatsapp-section" id="whatsapp">
+    <div class="whatsapp-card">
+      <div class="whatsapp-image">
+        <img src="community.jpg" alt="WhatsApp" />
+      </div>
+      <div class="whatsapp-info">
+        <h3>Join our WhatsApp Community</h3>
+        <p>Connect with other members for updates, mentorship and event announcements.</p>
+        <a class="join-btn" href="https://chat.whatsapp.com/your-invite-link" target="_blank" rel="noopener">Join on WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOK SECTION -->
+  <section class="book-section" id="book">
+    <div class="book-card">
+      <img src="book.png" alt="Book cover" />
+      <div class="book-info">
+        <h3>One-On-One Consultation — A Guidebook</h3>
+        <p>Download our free guidebook to get practical steps for growth, mentorship, and community impact.</p>
+        <a class="download-btn" href="https://selar.com/2550ut5u05" download>Download the Book</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOCIAL MEDIA SECTION -->
+  <section class="social-section" id="social">
+    <div class="social-card">
+      <div class="social-title">
+        <h3>Visit my Social Pages</h3>
+        <p>Follow me for updates, videos and community highlights.</p>
+      </div>
+      <div class="social-links">
+        <a href="https://instagram.com/yourprofile" target="_blank" aria-label="Instagram">
+          <!-- Instagram SVG -->
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3.5a4.5 4.5 0 1 1 0 9 4.5 4.5 0 0 1 0-9zm0 2a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5z"/></svg>
+          <span class="social-label">Instagram</span>
+        </a>
+        <a href="https://facebook.com/yourprofile" target="_blank" aria-label="Facebook">
+          <!-- Facebook SVG -->
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22 12.1C22 6.5 17.5 2 11.9 2S2 6.5 2 12.1c0 5 3.7 9.1 8.5 9.9v-7H8.2v-2.9h2.3V9.4c0-2.3 1.4-3.6 3.4-3.6.9 0 1.8.1 1.8.1v2h-1c-1 0-1.3.6-1.3 1.3v1.6h2.2l-.4 2.9h-1.8v7C18.3 21.2 22 17.1 22 12.1z"/></svg>
+          <span class="social-label">Facebook</span>
+        </a>
+        <a href="https://linkedin.com/in/yourprofile" target="_blank" aria-label="LinkedIn">
+          <!-- LinkedIn SVG -->
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 3A2 2 0 0 1 21 5v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14zM8.5 17.3V10.3H6.1v7h2.4zm-1.2-8.1a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6zM18 17.3V13c0-2.2-1.2-3.2-2.8-3.2-1.3 0-1.9.7-2.2 1.2v-1H10.6c.03.7 0 7 0 7h2.4v-3.9c0-.2 0-.5.1-.8.2-.5.7-1 1.4-1 1 0 1.4.8 1.4 2v4.6H18z"/></svg>
+          <span class="social-label">LinkedIn</span>
+        </a>
+        <a href="https://youtube.com/yourchannel" target="_blank" aria-label="YouTube">
+          <!-- YouTube SVG -->
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 15l5.2-3L10 9v6zm11-6.5s0-1.7-.2-2.5c-.2-.9-.8-1.6-1.6-1.9C17.7 4 12 4 12 4s-5.7 0-6.2.1c-.8.3-1.4 1-1.6 1.9C4 7.8 4 9.5 4 9.5S4 11.3 4.2 12c.2.9.8 1.6 1.6 1.9.5.1 6.2.1 6.2.1s5.7 0 6.2-.1c.8-.3 1.4-1 1.6-1.9.2-.7.2-2.5.2-2.5z"/></svg>
+          <span class="social-label">YouTube</span>
+        </a>
       </div>
     </div>
   </section>
