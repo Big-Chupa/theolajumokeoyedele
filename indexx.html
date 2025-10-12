@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Her NGO</title>
+  <style>
+    /* RESET */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      overflow-x: hidden;
+      font-family: "Poppins", sans-serif;
+      background: #fdfdfd;
+      color: #333;
+      scroll-behavior: smooth;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      border-radius: 10px;
+      display: block;
+      height: auto;
+    }
+
+    /* PRELOADER */
+    #preloader {
+      position: fixed;
+      inset: 0;
+      background: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+      transition: opacity 0.6s ease, visibility 0.6s ease;
+    }
+
+    #preloader.hide {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    #preloader img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      animation: spin 2s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* NAVBAR */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      /* padding: 1rem 2rem; */
+      padding: 0px 40px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+    }
+
+    nav img {
+      height: 50px;
+      width: 50px;
+      border-radius: 50%;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    nav ul li a {
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      transition: 0.3s;
+    }
+
+    nav ul li a:hover {
+      background: #f0c200;
+      color: #fff;
+    }
+
+    /* HAMBURGER */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      z-index: 1100;
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background: #333;
+      border-radius: 3px;
+      transition: all 0.3s ease;
+    }
+
+    .hamburger.open span:nth-child(1) {
+      transform: rotate(45deg) translateY(8px);
+    }
+
+    .hamburger.open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.open span:nth-child(3) {
+      transform: rotate(-45deg) translateY(-8px);
+    }
+
+    /* SECTIONS */
+    section {
+      /* min-height: 100vh; */
+      height: auto;
+      padding: 20px 40px;
+      /* padding: 6rem 2rem 2rem; */
+      /* background-color: red; */
+      margin-bottom: 50px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(60px);
+      transition: opacity 1s ease, transform 1s ease;
+      position: relative;
+      top: 60px;
+    }
+
+    section.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    #home img,
+    #mission img,
+    #offers img {
+      height: 400px;
+      width: 400px;
+      object-fit: cover;
+    }
+
+    section:nth-child(even).show {
+      animation: slideLeft 1s ease forwards;
+    }
+
+    section:nth-child(odd).show {
+      animation: slideRight 1s ease forwards;
+    }
+
+    @keyframes slideLeft {
+      from {
+        transform: translateX(80px);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideRight {
+      from {
+        transform: translateX(-80px);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    section h1,
+    section h2 {
+      margin-bottom: 1rem;
+    }
+
+    section p {
+      max-width: 700px;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    /* DESKTOP SIDE BY SIDE */
+    @media (min-width: 900px) {
+      section {
+        flex-direction: row;
+        justify-content: space-around;
+        text-align: left;
+      }
+
+      section img {
+        width: 45%;
+      }
+
+      section .text {
+        width: 45%;
+      }
+    }
+
+    /* FORM */
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    input,
+    button {
+      padding: 0.8rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #f0c200;
+    }
+
+    button {
+      background: #f0c200;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #333;
+    }
+
+    /* TESTIMONIALS (carousel slide style) */
+    .carousel {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      max-width: 700px;
+      margin: auto;
+      padding: 2rem 0;
+    }
+
+    .carousel-inner {
+      display: flex;
+      transition: transform 0.6s ease;
+      gap: 0;
+      width: auto;
+      /* let flex content determine total width */
+      will-change: transform;
+      /* enable snap so a single slide is aligned cleanly (if users scrollable) */
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .testimonial {
+      min-width: 100%;
+      width: 100%;
+      flex-shrink: 0;
+      text-align: center;
+      padding: 2rem;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      /* align each slide to the container snap point */
+      scroll-snap-align: start;
+    }
+
+    .testimonial img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      margin: 0 auto 1rem;
+      object-fit: cover;
+      display: block;
+    }
+
+    .testimonial p {
+      font-style: italic;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Carousel buttons */
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #f0c200;
+      border: none;
+      color: #fff;
+      font-size: 1.5rem;
+      padding: 0.6rem 0.9rem;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: 0.3s;
+      z-index: 5;
+    }
+
+    .carousel-btn:hover {
+      background: #333;
+    }
+
+    .prev {
+      left: 10px;
+    }
+
+    .next {
+      right: 10px;
+    }
+
+    /* Mobile fix: reposition buttons */
+    @media (max-width: 600px) {
+      .carousel-btn {
+        top: auto;
+        bottom: 10px;
+        transform: none;
+        font-size: 1.2rem;
+        padding: 0.4rem 0.7rem;
+      }
+
+      .prev {
+        left: 30%;
+      }
+
+      .next {
+        right: 30%;
+      }
+
+      /* Make carousel and testimonials fit small screens better */
+      .carousel {
+        padding: 1rem 0;
+        max-width: 100%;
+      }
+
+      .carousel-inner {
+        /* ensure transform math aligns with viewport width on small screens */
+        gap: 0;
+      }
+
+      .testimonial {
+        padding: 1rem;
+      }
+
+      .testimonial img {
+        width: 80px;
+        height: 80px;
+        margin-bottom: 0.75rem;
+      }
+
+      .testimonial p {
+        font-size: 0.95rem;
+        line-height: 1.4;
+        word-break: break-word;
+        hyphens: auto;
+        max-height: none;
+      }
+
+      /* reduce overall section padding to give more space to text */
+      section {
+        padding: 4rem 1rem 2rem;
+      }
+    }
+
+    /* FOOTER */
+    footer {
+      position: relative;
+      top: 60px;
+      background: #222;
+      color: #fff;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    /* MOBILE NAV */
+    @media (max-width: 900px) {
+      .hamburger {
+        display: flex;
+      }
+
+      nav ul {
+        position: fixed;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background: #fff;
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+        text-align: center;
+        transition: transform 0.4s ease;
+        transform: translateY(-200%);
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      nav ul.show {
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- PRELOADER -->
+  <div id="preloader">
+    <img src="logo.jpg" alt="logo" />
+  </div>
+
+  <!-- NAVBAR -->
+  <nav>
+    <img src="logo.jpg" alt="Logo">
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#mission">Mission</a></li>
+      <li><a href="#offers">Offers</a></li>
+      <li><a href="#form">Join Us</a></li>
+      <li><a href="#testimonials">Testimonials</a></li>
+    </ul>
+    <div class="hamburger"><span></span><span></span><span></span></div>
+  </nav>
+
+  <!-- HOME -->
+  <section id="home">
+    <div class="text">
+      <h1>Olajumoke Oyedele</h1>
+      <p>
+        Olajumoke Oyedele is a nurturer commissioned by the Lord to raise, rebuild, restore, and realign destinies.
+
+        She is a pastor, transformative coach, and founder of Becoming Circle, a platform dedicated to inspiring,
+        transforming, and equipping women to step into their God-ordained purpose. She is also the convener of Blazing
+        Sisters and Blazing Wives, interdenominational fellowships focused on drawing women closer to Christ.
+
+        Olajumoke is the visionary behind the annual Visionary Women Conference, a gathering that brings women into
+        clarity, direction and strategic alignment for the new year.
+
+        She is also the founder of the FOAM (Fausat Omolola Awero Memorial) Foundation, which has impacted over 5,000
+        women and children through maternal and child health initiatives.
+
+        She is a fellow of the Carrington Youth Fellowship Initiative, associated with the United States Consulate
+        General.
+
+
+        She continues to live out her calling - nurturing lives, restoring hope and raising women into the fullness of
+        their God-given identity and purpose.
+      </p>
+    </div>
+    <img src="Olajumoke1.jpg" alt="Founder" />
+  </section>
+
+  <!-- MISSION -->
+  <section id="mission">
+    <div class="text">
+      <h2>Our Mission</h2>
+      <p>
+        We aim to empower, uplift, and inspire communities through service,
+        education, and sustainable development programs.
+      </p>
+    </div>
+    <img src="Olajumoke2.jpg" alt="Mission" />
+  </section>
+
+  <!-- OFFERS -->
+  <section id="offers">
+    <div class="text">
+      <h2>What We Offer</h2>
+      <p>
+        We provide mentorship, training, and outreach to support women,
+        children, and vulnerable communities.
+      </p>
+    </div>
+    <img src="Olajumoke3.jpg" alt="Offers" />
+  </section>
+
+  <!-- FORM -->
+  <section id="form">
+    <div class="text">
+      <h2>Join Our Community</h2>
+      <p>
+        Be part of a growing network of change-makers. Fill in your details to
+        get involved.
+      </p>
+      <form>
+        <input type="text" placeholder="Full Name" required />
+        <input type="email" placeholder="Email Address" required />
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="testimonials">
+    <div class="text">
+      <h2>Testimonials</h2>
+      <div class="carousel" id="carousel">
+        <div class="carousel-inner" id="carousel-inner">
+          <div class="testimonial">
+            <img src="Yetunde.jpg" alt="Person1" />
+            <p>Knowing Pastor Olajumoke Omoteniola has truly been a blessing. My journey with her began over a year ago,
+              at a time when I was seeking direction and a deeper sense of personal growth. I knew I needed to develop
+              myself, but I didn’t know where to start.
+
+              From the very first moment, her teachings carried warmth, wisdom, and divine insight. She doesn’t just
+              teach; she builds, corrects, and inspires. Through her classes and mentorship, I have learned to see life
+              from a place of purpose, faith, and discipline. Each session stretched my thinking and challenged me to
+              grow in character, mindset, and spiritual depth.
+
+              Under her guidance, I’ve become more self-aware, confident, and intentional about my goals. I’ve learned
+              to embrace growth as a process and to trust God’s plan even when the path isn’t clear.
+              Pastor Olajumoke has been more than a teacher, she’s a mentor, a guide, and a vessel through whom God
+              continues to shape lives.
+
+              I’m deeply grateful for her impact on my journey and the transformation that has come through her
+              teachings. If you ever have the privilege to learn from her, do not hesitate, her words will awaken
+              purpose and her presence will inspire growth.<br /><b>- Yetunde.</b></p>
+          </div>
+
+          <div class="testimonial">
+            <img src="pelumi.jpg" alt="Person2" />
+            <p>“Being under Mama Olajumoke’s leadership has been a truly life-changing experience. Her intentionality in
+              ensuring our growth - both spiritually and personally is top-notch.
+
+              When I was chosen as one of the State Hub Executives, I was initially scared, but her guidance made the
+              journey easy and transformational. Through her mentorship, my leadership potential came alive; I have
+              grown in confidence, anchored programs, and led sessions I never thought I could.
+
+              Spiritually, my growth has been phenomenal. I now invest in my personal development without hesitation,
+              thanks to the hunger she has stirred in me. The books she constantly sends have been eye-opening, and her
+              love and support never go unnoticed.
+
+              Mama’s selflessness and commitment to creating opportunities for us—organizing impactful programs and
+              inviting speakers without demanding anything in return have taught us the true essence of service and
+              purpose.
+
+              She constantly reminds us that there is always room for improvement, and because of her, my self-esteem
+              has soared.
+
+              Truly, my generation is blessed to have her. May her light continue to shine and her impact never
+              end.”<br /><b>- Pelumi.</b></p>
+          </div>
+
+          <div class="testimonial">
+            <img src="Olulade.jpg" alt="Person3" />
+            <p>
+              "My Mentorship Experience with Mrs Olajumoke Oyedele
+
+              Being mentored under Mrs. Olajumoke has been a truly transformative journey for me. Over the years, I have
+              experienced remarkable growth — evolving from someone who approached tasks with a lackadaisical attitude
+              to a person who now executes every assignment with intentionality and excellence.
+
+              Through her mentorship, I have learned the invaluable virtues of diligence, consistency, and discipline —
+              principles that have shaped my mindset and approach to purpose-driven work. One of the most impactful
+              aspects of our sessions is how she helps me gain clarity and guides me in setting my priorities right,
+              ensuring that I remain focused on what truly matters.
+
+              I am deeply grateful for the wisdom, patience, and guidance Mrs. Olajumoke continually imparts."<br /><b>-
+                Deborah Olulade.</b>
+            </p>
+          </div>
+
+          <div class="testimonial">
+            <img src="Odunayo.jpg" alt="Person4" />
+            <p>
+              "Mrs Olajumoke Romiti-Oyedele, has always been a force that propelled me to do more, she has always been a
+              source of encouragement and always preaching "you can be a better version of yourself", but the truth
+              about her is that she is not going to say that alone but teach you ways to do it.
+
+              Mama has always been listening to anyone that cares to say it out and I am not excluded. I am grateful for
+              the gift of you, it makes me feel accountable, a guiding principle that resets my brain to do well at all
+              times, because I don't want to fumble.
+
+              She is one of those I don't want to let down. She has invested so much in me and I can't let that go to
+              waste. Thank you Mama for yielding to God to serve mankind."<br /><b>- Odunayo Sonde.</b>
+            </p>
+          </div>
+        </div>
+        <button class="carousel-btn prev" onclick="prevSlide()">
+          &#10094;
+        </button>
+        <button class="carousel-btn next" onclick="nextSlide()">
+          &#10095;
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Olajumoke Oyedele&trade; | All Rights Reserved</p>
+  </footer>
+
+  <script>
+    // PRELOADER
+    window.addEventListener("load", () => {
+      setTimeout(
+        () => document.getElementById("preloader").classList.add("hide"),
+        2000
+      );
+    });
+
+    // SCROLL ANIMATION
+    const sections = document.querySelectorAll("section");
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) entry.target.classList.add("show");
+          else entry.target.classList.remove("show");
+        });
+      },
+      { threshold: 0.3 }
+    );
+    sections.forEach((s) => observer.observe(s));
+
+    // CAROUSEL (slide movement + pause + swipe)
+    let currentIndex = 0;
+    const carouselInner = document.getElementById("carousel-inner");
+    const slides = document.querySelectorAll(".testimonial");
+    const totalSlides = slides.length;
+    const carousel = document.getElementById("carousel");
+
+    function updateCarousel() {
+      carouselInner.style.transform = `translateX(-${currentIndex * 100}%)`;
+    }
+    function nextSlide() {
+      currentIndex = (currentIndex + 1) % totalSlides;
+      updateCarousel();
+    }
+    function prevSlide() {
+      currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+      updateCarousel();
+    }
+
+    // Auto-slide control
+    let autoSlide = setInterval(nextSlide, 4000);
+    function pauseAutoSlide() {
+      clearInterval(autoSlide);
+    }
+    function resumeAutoSlide() {
+      autoSlide = setInterval(nextSlide, 4000);
+    }
+
+    // Pause/resume on hover/touch
+    carousel.addEventListener("mouseenter", pauseAutoSlide);
+    carousel.addEventListener("mouseleave", resumeAutoSlide);
+    carousel.addEventListener("touchstart", pauseAutoSlide);
+    carousel.addEventListener("touchend", resumeAutoSlide);
+
+    // Swipe gestures
+    let startX = 0;
+    carousel.addEventListener("touchstart", (e) => {
+      startX = e.touches[0].clientX;
+    });
+    carousel.addEventListener("touchend", (e) => {
+      let endX = e.changedTouches[0].clientX;
+      if (startX - endX > 50) nextSlide();
+      if (endX - startX > 50) prevSlide();
+    });
+
+    // HAMBURGER MENU
+    const hamburger = document.querySelector(".hamburger");
+    const navMenu = document.querySelector("nav ul");
+    hamburger.addEventListener("click", () => {
+      hamburger.classList.toggle("open");
+      navMenu.classList.toggle("show");
+    });
+    document.querySelectorAll("nav ul li a").forEach((link) => {
+      link.addEventListener("click", () => {
+        hamburger.classList.remove("open");
+        navMenu.classList.remove("show");
+      });
+    });
+  </script>
+</body>
+
+</html>
